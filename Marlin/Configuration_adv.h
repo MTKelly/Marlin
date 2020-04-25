@@ -149,8 +149,8 @@
  * THERMAL_PROTECTION_HYSTERESIS and/or THERMAL_PROTECTION_PERIOD
  */
 #if ENABLED(THERMAL_PROTECTION_HOTENDS)
-  #define THERMAL_PROTECTION_PERIOD 40        // Seconds
-  #define THERMAL_PROTECTION_HYSTERESIS 4     // Degrees Celsius
+  #define THERMAL_PROTECTION_PERIOD 60        // Seconds		//BigBox
+  #define THERMAL_PROTECTION_HYSTERESIS 20     // Degrees Celsius		//BigBox
 
   //#define ADAPTIVE_FAN_SLOWING              // Slow part cooling fan if temperature drops
   #if BOTH(ADAPTIVE_FAN_SLOWING, PIDTEMP)
@@ -169,22 +169,22 @@
    * and/or decrease WATCH_TEMP_INCREASE. WATCH_TEMP_INCREASE should not be set
    * below 2.
    */
-  #define WATCH_TEMP_PERIOD 20                // Seconds
-  #define WATCH_TEMP_INCREASE 2               // Degrees Celsius
+  #define WATCH_TEMP_PERIOD 60                // Seconds		//BigBox
+  #define WATCH_TEMP_INCREASE 20               // Degrees Celsius		//BigBox
 #endif
 
 /**
  * Thermal Protection parameters for the bed are just as above for hotends.
  */
 #if ENABLED(THERMAL_PROTECTION_BED)
-  #define THERMAL_PROTECTION_BED_PERIOD        20 // Seconds
-  #define THERMAL_PROTECTION_BED_HYSTERESIS     2 // Degrees Celsius
+  #define THERMAL_PROTECTION_BED_PERIOD        60 // Seconds		//BigBox
+  #define THERMAL_PROTECTION_BED_HYSTERESIS     20 // Degrees Celsius		//BigBox
 
   /**
    * As described above, except for the bed (M140/M190/M303).
    */
   #define WATCH_BED_TEMP_PERIOD                60 // Seconds
-  #define WATCH_BED_TEMP_INCREASE               2 // Degrees Celsius
+  #define WATCH_BED_TEMP_INCREASE               20 // Degrees Celsius		//BigBox
 #endif
 
 /**
@@ -204,7 +204,7 @@
 #if ENABLED(PIDTEMP)
   // Add an experimental additional term to the heater power, proportional to the extrusion speed.
   // A well-chosen Kc value should add just enough power to melt the increased material volume.
-  //#define PID_EXTRUSION_SCALING
+  #define PID_EXTRUSION_SCALING		//BigBox
   #if ENABLED(PID_EXTRUSION_SCALING)
     #define DEFAULT_Kc (100) //heating power=Kc*(e_speed)
     #define LPQ_MAX_LEN 50
@@ -376,7 +376,7 @@
  *
  * Define one or both of these to override the default 0-255 range.
  */
-//#define FAN_MIN_PWM 50
+#define FAN_MIN_PWM 50		//BigBox
 //#define FAN_MAX_PWM 128
 
 /**
@@ -420,15 +420,15 @@
  * Multiple extruders can be assigned to the same pin in which case
  * the fan will turn on when any selected extruder is above the threshold.
  */
-#define E0_AUTO_FAN_PIN -1
-#define E1_AUTO_FAN_PIN -1
+#define E0_AUTO_FAN_PIN 8		//BigBox
+#define E1_AUTO_FAN_PIN 8		//BigBox
 #define E2_AUTO_FAN_PIN -1
 #define E3_AUTO_FAN_PIN -1
 #define E4_AUTO_FAN_PIN -1
 #define E5_AUTO_FAN_PIN -1
 #define CHAMBER_AUTO_FAN_PIN -1
 
-#define EXTRUDER_AUTO_FAN_TEMPERATURE 50
+#define EXTRUDER_AUTO_FAN_TEMPERATURE 40		//BigBox
 #define EXTRUDER_AUTO_FAN_SPEED 255   // 255 == full speed
 #define CHAMBER_AUTO_FAN_TEMPERATURE 30
 #define CHAMBER_AUTO_FAN_SPEED 255
@@ -950,8 +950,8 @@
 // Change values more rapidly when the encoder is rotated faster
 #define ENCODER_RATE_MULTIPLIER
 #if ENABLED(ENCODER_RATE_MULTIPLIER)
-  #define ENCODER_10X_STEPS_PER_SEC   30  // (steps/s) Encoder rate for 10x speed
-  #define ENCODER_100X_STEPS_PER_SEC  80  // (steps/s) Encoder rate for 100x speed
+  #define ENCODER_10X_STEPS_PER_SEC   75  // (steps/s) Encoder rate for 10x speed		//BigBox
+  #define ENCODER_100X_STEPS_PER_SEC  160  // (steps/s) Encoder rate for 100x speed		//BigBox
 #endif
 
 // Play a beep when the feedrate is changed from the Status Screen
@@ -1468,7 +1468,7 @@
  *
  * Warning: Does not respect endstops!
  */
-//#define BABYSTEPPING
+#define BABYSTEPPING		//BigBox
 #if ENABLED(BABYSTEPPING)
   //#define INTEGRATED_BABYSTEPPING         // EXPERIMENTAL integration of babystepping into the Stepper ISR
   //#define BABYSTEP_WITHOUT_HOMING

@@ -121,18 +121,18 @@
  *
  * :[2400, 9600, 19200, 38400, 57600, 115200, 250000, 500000, 1000000]
  */
-#define BAUDRATE 250000
+#define BAUDRATE 230400 // BigBox
 
 // Enable the Bluetooth serial interface on AT90USB devices
 //#define BLUETOOTH
 
 // Choose the name from boards.h that matches your setup
 #ifndef MOTHERBOARD
-  #define MOTHERBOARD BOARD_RAMPS_14_EFB
+  #define MOTHERBOARD BOARD_RUMBA // BigBox
 #endif
 
 // Name displayed in the LCD "Ready" message and Info menu
-//#define CUSTOM_MACHINE_NAME "3D Printer"
+#define CUSTOM_MACHINE_NAME "MK BigBox"  // MK
 
 // Printer's unique ID, used by some programs to differentiate between machines.
 // Choose your own or use a service like http://www.uuidgenerator.net/version4
@@ -142,10 +142,10 @@
 
 // This defines the number of extruders
 // :[1, 2, 3, 4, 5, 6, 7, 8]
-#define EXTRUDERS 1
+#define EXTRUDERS 2 // BigBox
 
 // Generally expected filament diameter (1.75, 2.85, 3.0, ...). Used for Volumetric, Filament Width Sensor, etc.
-#define DEFAULT_NOMINAL_FILAMENT_DIA 3.0
+#define DEFAULT_NOMINAL_FILAMENT_DIA 1.75   //BigBox
 
 // For Cyclops or any "multi-extruder" that shares a single nozzle.
 //#define SINGLENOZZLE
@@ -406,15 +406,15 @@
  *   998 : Dummy Table that ALWAYS reads 25°C or the temperature defined below.
  *   999 : Dummy Table that ALWAYS reads 100°C or the temperature defined below.
  */
-#define TEMP_SENSOR_0 1
-#define TEMP_SENSOR_1 0
+#define TEMP_SENSOR_0 20    //BigBox
+#define TEMP_SENSOR_1 20    //BigBox
 #define TEMP_SENSOR_2 0
 #define TEMP_SENSOR_3 0
 #define TEMP_SENSOR_4 0
 #define TEMP_SENSOR_5 0
 #define TEMP_SENSOR_6 0
 #define TEMP_SENSOR_7 0
-#define TEMP_SENSOR_BED 0
+#define TEMP_SENSOR_BED 5    //BigBox
 #define TEMP_SENSOR_PROBE 0
 #define TEMP_SENSOR_CHAMBER 0
 
@@ -450,8 +450,8 @@
 // Above this temperature the heater will be switched off.
 // This can protect components from overheating, but NOT from shorts and failures.
 // (Use MINTEMP for thermistor short/failure protection.)
-#define HEATER_0_MAXTEMP 275
-#define HEATER_1_MAXTEMP 275
+#define HEATER_0_MAXTEMP 300    //BigBox
+#define HEATER_1_MAXTEMP 300    //BigBox
 #define HEATER_2_MAXTEMP 275
 #define HEATER_3_MAXTEMP 275
 #define HEATER_4_MAXTEMP 275
@@ -482,11 +482,16 @@
                                   // is more than PID_FUNCTIONAL_RANGE then the PID will be shut off and the heater will be set to min/max.
 
   // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
-
+  
+  // E3D v6 (PT100, 30W)	//BigBox
+  #define  DEFAULT_Kp 29.20	//BigBox
+  #define  DEFAULT_Ki 04.73	//BigBox
+  #define  DEFAULT_Kd 45.33 	//BigBox 
+  
   // Ultimaker
-  #define DEFAULT_Kp 22.2
-  #define DEFAULT_Ki 1.08
-  #define DEFAULT_Kd 114
+  //#define DEFAULT_Kp 22.2	//BigBox
+  //#define DEFAULT_Ki 1.08	//BigBox
+  //#define DEFAULT_Kd 114	//BigBox
 
   // MakerGear
   //#define DEFAULT_Kp 7.0
@@ -517,7 +522,7 @@
  * heater. If your configuration is significantly different than this and you don't understand
  * the issues involved, don't use bed PID until someone else verifies that your hardware works.
  */
-//#define PIDTEMPBED
+#define PIDTEMPBED	//BigBox
 
 //#define BED_LIMIT_SWITCHING
 
@@ -533,11 +538,16 @@
   //#define MIN_BED_POWER 0
   //#define PID_BED_DEBUG // Sends debug data to the serial port.
 
+  //E3D BigBox Variable Power Density Heated Bed (24V)	//BigBox
+  #define  DEFAULT_bedKp 336  	//BigBox
+  #define  DEFAULT_bedKi 61	    //BigBox
+  #define  DEFAULT_bedKd 462.4	//BigBox
+
   //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   //from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
-  #define DEFAULT_bedKp 10.00
-  #define DEFAULT_bedKi .023
-  #define DEFAULT_bedKd 305.4
+  //#define DEFAULT_bedKp 10.00	//BigBox
+  //#define DEFAULT_bedKi .023	//BigBox
+  //#define DEFAULT_bedKd 305.4	//BigBox
 
   //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   //from pidautotune
@@ -730,14 +740,14 @@
  * Override with M92
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 4000, 500 }
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 160, 160, 1600, 304 }	//BigBox
 
 /**
  * Default Max Feed Rate (mm/s)
  * Override with M203
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_FEEDRATE          { 300, 300, 5, 25 }
+#define DEFAULT_MAX_FEEDRATE          { 150, 150, 6, 50 }	//BigBox
 
 //#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
@@ -750,7 +760,7 @@
  * Override with M201
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 10000 }
+#define DEFAULT_MAX_ACCELERATION      { 1000, 1000, 100, 10000 }	//BigBox
 
 //#define LIMITED_MAX_ACCEL_EDITING     // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
 #if ENABLED(LIMITED_MAX_ACCEL_EDITING)
@@ -765,9 +775,9 @@
  *   M204 R    Retract Acceleration
  *   M204 T    Travel Acceleration
  */
-#define DEFAULT_ACCELERATION          3000    // X, Y, Z and E acceleration for printing moves
-#define DEFAULT_RETRACT_ACCELERATION  3000    // E acceleration for retracts
-#define DEFAULT_TRAVEL_ACCELERATION   3000    // X, Y, Z acceleration for travel (non printing) moves
+#define DEFAULT_ACCELERATION          1000    // X, Y, Z and E acceleration for printing moves	//BigBox
+#define DEFAULT_RETRACT_ACCELERATION  5000    // E acceleration for retracts	//BigBox
+#define DEFAULT_TRAVEL_ACCELERATION   1000    // X, Y, Z acceleration for travel (non printing) moves	//BigBox
 
 /**
  * Default Jerk limits (mm/s)
@@ -779,9 +789,9 @@
  */
 //#define CLASSIC_JERK
 #if ENABLED(CLASSIC_JERK)
-  #define DEFAULT_XJERK 10.0
-  #define DEFAULT_YJERK 10.0
-  #define DEFAULT_ZJERK  0.3
+  #define DEFAULT_XJERK 8.0	//BigBox
+  #define DEFAULT_YJERK 8.0	//BigBox
+  #define DEFAULT_ZJERK  0.4	//BigBox
 
   //#define TRAVEL_EXTRA_XYJERK 0.0     // Additional jerk allowance for all travel moves
 
@@ -1056,15 +1066,15 @@
 // @section machine
 
 // Invert the stepper direction. Change (or reverse the motor connector) if an axis goes the wrong way.
-#define INVERT_X_DIR false
-#define INVERT_Y_DIR true
+#define INVERT_X_DIR true	//BigBox
+#define INVERT_Y_DIR false	//BigBox
 #define INVERT_Z_DIR false
 
 // @section extruder
 
 // For direct drive extruder v9 set to true, for geared extruder set to false.
-#define INVERT_E0_DIR false
-#define INVERT_E1_DIR false
+#define INVERT_E0_DIR true	//BigBox
+#define INVERT_E1_DIR true	//BigBox
 #define INVERT_E2_DIR false
 #define INVERT_E3_DIR false
 #define INVERT_E4_DIR false
@@ -1092,7 +1102,7 @@
 // @section machine
 
 // The size of the print bed
-#define X_BED_SIZE 200
+#define X_BED_SIZE 260	//BigBox
 #define Y_BED_SIZE 200
 
 // Travel limits (mm) after homing, corresponding to endstop positions.
@@ -1100,8 +1110,8 @@
 #define Y_MIN_POS 0
 #define Z_MIN_POS 0
 #define X_MAX_POS X_BED_SIZE
-#define Y_MAX_POS Y_BED_SIZE
-#define Z_MAX_POS 200
+#define Y_MAX_POS 235	//BigBox
+#define Z_MAX_POS 300	//BigBox
 
 /**
  * Software Endstops
@@ -1206,7 +1216,7 @@
 //#define AUTO_BED_LEVELING_LINEAR
 //#define AUTO_BED_LEVELING_BILINEAR
 //#define AUTO_BED_LEVELING_UBL
-//#define MESH_BED_LEVELING
+#define MESH_BED_LEVELING	//BigBox
 
 /**
  * Normally G28 leaves leveling disabled on completion. Enable
@@ -1303,7 +1313,7 @@
   #define GRID_MAX_POINTS_X 3    // Don't use more than 7 points per axis, implementation limited.
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
-  //#define MESH_G28_REST_ORIGIN // After homing all axes ('G28' or 'G28 XYZ') rest Z at Z_MIN_POS
+  //#define MESH_G28_REST_ORIGIN // After homing all axes ('G28' or 'G28 XYZ') rest Z at Z_MIN_POS //MK (Disabled)
 
 #endif // BED_LEVELING
 
@@ -1311,12 +1321,12 @@
  * Add a bed leveling sub-menu for ABL or MBL.
  * Include a guided procedure if manual probing is enabled.
  */
-//#define LCD_BED_LEVELING
+//#define LCD_BED_LEVELING	//BigBox //MK (Disabled)
 
 #if ENABLED(LCD_BED_LEVELING)
   #define MESH_EDIT_Z_STEP  0.025 // (mm) Step size while manually probing Z axis.
   #define LCD_PROBE_Z_RANGE 4     // (mm) Z Range centered on Z_MIN_POS for LCD Z adjustment
-  //#define MESH_EDIT_MENU        // Add a menu to edit mesh points
+  //#define MESH_EDIT_MENU        // Add a menu to edit mesh points //MK (Disable)
 #endif
 
 // Add a menu item to move between bed corners for manual bed adjustment
@@ -1356,11 +1366,11 @@
 // - Move the Z probe (or nozzle) to a defined XY point before Z Homing when homing all axes (G28).
 // - Prevent Z homing when the Z probe is outside bed area.
 //
-//#define Z_SAFE_HOMING
+#define Z_SAFE_HOMING	//BigBox
 
 #if ENABLED(Z_SAFE_HOMING)
-  #define Z_SAFE_HOMING_X_POINT ((X_BED_SIZE) / 2)    // X point for Z homing when homing all axes (G28).
-  #define Z_SAFE_HOMING_Y_POINT ((Y_BED_SIZE) / 2)    // Y point for Z homing when homing all axes (G28).
+  #define Z_SAFE_HOMING_X_POINT (150)    // X point for Z homing when homing all axes (G28). //BigBox
+  #define Z_SAFE_HOMING_Y_POINT (100)    // Y point for Z homing when homing all axes (G28). //BigBox
 #endif
 
 // Homing speeds (mm/m)
@@ -1442,7 +1452,7 @@
  *   M501 - Read settings from EEPROM. (i.e., Throw away unsaved changes)
  *   M502 - Revert settings to "factory" defaults. (Follow with M500 to init the EEPROM.)
  */
-//#define EEPROM_SETTINGS     // Persistent storage with M500 and M501
+#define EEPROM_SETTINGS     // Persistent storage with M500 and M501 //BigBox
 //#define DISABLE_M503        // Saves ~2700 bytes of PROGMEM. Disable for release!
 #define EEPROM_CHITCHAT       // Give feedback on EEPROM commands. Disable to save PROGMEM.
 #define EEPROM_BOOT_SILENT    // Keep M503 quiet and only give errors during first load
@@ -1474,8 +1484,8 @@
 
 // Preheat Constants
 #define PREHEAT_1_LABEL       "PLA"
-#define PREHEAT_1_TEMP_HOTEND 180
-#define PREHEAT_1_TEMP_BED     70
+#define PREHEAT_1_TEMP_HOTEND 220 //BigBox
+#define PREHEAT_1_TEMP_BED     60 //BigBox
 #define PREHEAT_1_FAN_SPEED     0 // Value from 0 to 255
 
 #define PREHEAT_2_LABEL       "ABS"
@@ -1656,7 +1666,7 @@
  * you must uncomment the following option or it won't work.
  *
  */
-//#define SDSUPPORT
+#define SDSUPPORT //BigBox
 
 /**
  * SD CARD: SPI SPEED
@@ -1690,13 +1700,13 @@
 // This option overrides the default number of encoder pulses needed to
 // produce one step. Should be increased for high-resolution encoders.
 //
-//#define ENCODER_PULSES_PER_STEP 4
+#define ENCODER_PULSES_PER_STEP 1 //BigBox
 
 //
 // Use this option to override the number of step signals required to
 // move between next/prev menu items.
 //
-//#define ENCODER_STEPS_PER_MENU_ITEM 1
+#define ENCODER_STEPS_PER_MENU_ITEM 4 //BigBox
 
 /**
  * Encoder Direction Options
@@ -1713,7 +1723,7 @@
 //
 //  Set this option if CLOCKWISE causes values to DECREASE
 //
-//#define REVERSE_ENCODER_DIRECTION
+#define REVERSE_ENCODER_DIRECTION //BigBox
 
 //
 // This option reverses the encoder direction for navigating LCD menus.
@@ -1753,8 +1763,8 @@
 // Note: Test audio output with the G-Code:
 //  M300 S<frequency Hz> P<duration ms>
 //
-//#define LCD_FEEDBACK_FREQUENCY_DURATION_MS 2
-//#define LCD_FEEDBACK_FREQUENCY_HZ 5000
+#define LCD_FEEDBACK_FREQUENCY_DURATION_MS 2 //BigBox
+#define LCD_FEEDBACK_FREQUENCY_HZ 500       //BigBox
 
 //=============================================================================
 //======================== LCD / Controller Selection =========================
@@ -1767,7 +1777,7 @@
 //
 // Note: Usually sold with a white PCB.
 //
-//#define REPRAP_DISCOUNT_SMART_CONTROLLER
+#define REPRAP_DISCOUNT_SMART_CONTROLLER //BigBox
 
 //
 // Original RADDS LCD Display+Encoder+SDCardReader
@@ -2126,7 +2136,7 @@
 // @section extras
 
 // Increase the FAN PWM frequency. Removes the PWM noise but increases heating in the FET/Arduino
-//#define FAST_PWM_FAN
+#define FAST_PWM_FAN //BigBox
 
 // Use software PWM to drive the fan, as for the heaters. This uses a very low frequency
 // which is not as annoying as with the hardware PWM. On the other hand, if this frequency
@@ -2189,14 +2199,14 @@
  * LED Type. Enable only one of the following two options.
  *
  */
-//#define RGB_LED
+//#define RGB_LED //MK (Disabled)
 //#define RGBW_LED
 
 #if EITHER(RGB_LED, RGBW_LED)
-  //#define RGB_LED_R_PIN 34
-  //#define RGB_LED_G_PIN 43
-  //#define RGB_LED_B_PIN 35
-  //#define RGB_LED_W_PIN -1
+  //#define RGB_LED_R_PIN 59 //MK (Disabled)
+  //#define RGB_LED_G_PIN 60 //MK (Disabled)
+  //#define RGB_LED_B_PIN 63 //MK (Disabled)
+  #define RGB_LED_W_PIN -1
 #endif
 
 // Support for Adafruit Neopixel LED driver
